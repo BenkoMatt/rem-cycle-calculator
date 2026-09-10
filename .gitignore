@@ -1,0 +1,5 @@
+qa/
+drafts/
+*.pyc
+__pycache/
+.DS_Store
