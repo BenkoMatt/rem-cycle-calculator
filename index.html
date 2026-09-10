@@ -175,6 +175,7 @@ select#latencySelect {
 .option .opt-side { grid-column: 2; grid-row: 1 / span 3; display: grid; justify-items: end; align-content: center; gap: var(--sp-2); text-align: right; }
 .option .opt-dur { font-size: var(--fs-base); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text); }
 .option .opt-dur-sub { font-size: var(--fs-sm); color: var(--muted); }
+.empty-state { margin: var(--sp-4) 0; padding: 0 var(--sp-2); color: var(--muted); font-size: var(--fs-base); text-align: center; }
 .chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin: var(--sp-1) 0 0; }
 .chip {
   display: inline-flex; align-items: center;
@@ -319,11 +320,11 @@ select#latencySelect {
     var opts;
     if (mode === 'wake-up') {
       var wake = timeInputToMinutes(wakeInput);
-      if (wake === null) { optionsEl.innerHTML = ''; return; }
+      if (wake === null) { optionsEl.innerHTML = '<p class="muted empty-state">Pick a wake-up time to see your bedtimes.</p>'; return; }
       opts = REMCalc.computeBedtimes(wake, lat);
     } else {
       var start = timeInputToMinutes(sleepInput);
-      if (start === null) { optionsEl.innerHTML = ''; return; }
+      if (start === null) { optionsEl.innerHTML = '<p class="muted empty-state">Pick a bedtime to see your wake-up times.</p>'; return; }
       opts = REMCalc.computeWakeTimes(start, lat);
     }
     var bestC = bestCycles(opts.map(function (o) { return o.cycles; }));
